@@ -1,31 +1,22 @@
 import styles from './Home.module.css'
 import {cars} from "./cars.data.js";
+import CarItem from "./car-item/CarItem.jsx";
+import {useMemo} from "react";
+import CreateCarForm from "./create-car-form/CreateCarForm.jsx";
 
 const Home = () => {
+    // сохраняет данные в кэш, без повторного выполнения
+    // const filteredCars = useMemo(() => cars.filter(car =>
+    // car.price > 23000), [])
+
     return (
         <>
             <h1>Cars catalog</h1>
+            <CreateCarForm />
             <div>
-                {cars.length ? (cars.map(car => (
-                    <div key={car.id} className={styles.item}>
-
-                        <div className={styles.image}
-                             style={{
-                                 backgroundImage: `url(${car.image})`
-                             }}
-                        />
-                        <div className={styles.info}>
-                            <h2>{car.name}</h2>
-                            <p>
-                                {new Intl.NumberFormat('ru-RU',{
-                                style: 'currency',
-                                currency: 'USD',
-                                }).format(car.price)}
-                            </p>
-                            <button>Read more</button>
-                        </div>
-
-                    </div>
+                {cars.length ? (
+                    cars.map(car => (
+                    <CarItem key={car.id} car={car} />
                 ))): <p>There are no cars</p>
                 }
             </div>

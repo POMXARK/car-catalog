@@ -1,7 +1,8 @@
 import styles from './Home.module.css'
 import {cars} from "./cars.data.js";
+import {cars as carsData} from "./cars.data.js";
 import CarItem from "./car-item/CarItem.jsx";
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 import CreateCarForm from "./create-car-form/CreateCarForm.jsx";
 
 const Home = () => {
@@ -9,10 +10,12 @@ const Home = () => {
     // const filteredCars = useMemo(() => cars.filter(car =>
     // car.price > 23000), [])
 
+    const [cars, setCars] = useState(carsData)
+
     return (
         <>
             <h1>Cars catalog</h1>
-            <CreateCarForm />
+            <CreateCarForm setCars={setCars}/>
             <div>
                 {cars.length ? (
                     cars.map(car => (

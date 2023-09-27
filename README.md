@@ -1,0 +1,3 @@
+- nvm use v20
+- yarn install
+- vite
